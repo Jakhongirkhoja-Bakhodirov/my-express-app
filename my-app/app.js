@@ -7,6 +7,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+const userMiddleware = require('./middlewares/userMiddleware');
+const cookieMiddleware = require('./middlewares/cookieValidator');
+
 var app = express();
 
 // view engine setup
@@ -17,7 +20,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// app.use(validateCookie);
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+//Define User Middlewares
+app.use(userMiddleware.myLogger);
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);

@@ -6,7 +6,9 @@ var router = express.Router();
 
 //Route methods
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  const currentTime = new Date();
+  const remainTime = currentTime.getTime() - req.time.getTime();
+  res.send(`respond with a resource ${remainTime} ms`);
 });
 
 router.all('/methods' , (req,res,next) => {
