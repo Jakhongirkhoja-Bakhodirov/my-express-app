@@ -83,4 +83,15 @@ router.post('/download/photo' , (req,res) => {
 // res.sendFile()	Send a file as an octet stream.
 // res.sendStatus()	Set the response status code and send its string representation as the response body.
 
+//Router-Level Middleware
+// router.use(function (req, res, next) {
+//   if (!req.headers['x-auth']) {
+//     console.log('Calling router-level middleware');
+//     return next('router')
+//   } else {
+//     console.log('sfds');
+//   }
+//   next()
+// })
+
 module.exports = router;

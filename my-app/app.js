@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 
 const userMiddleware = require('./middlewares/userMiddleware');
 const cookieMiddleware = require('./middlewares/cookieValidator');
+const router = require('./routes/index');
 
 var app = express();
 
@@ -33,10 +34,20 @@ app.use('/api/users/:id' , userMiddleware.getUserID);
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 
+//Error-handling middleware
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+//Router-Level Middleware
+router.use(function (req, res, next) {
+    if (req.headers['x-auth']) {
+      console.log('Calling router-level middleware');
+      return next('router')
+    } 
+    next()
+  })
 
 // error handler
 app.use(function(err, req, res, next) {
