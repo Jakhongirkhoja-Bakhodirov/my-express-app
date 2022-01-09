@@ -27,6 +27,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Define User Middlewares
 app.use(userMiddleware.myLogger);
 
+//Application-level Middleware
+app.use('/api/users/:id' , userMiddleware.getUserID);
+
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 

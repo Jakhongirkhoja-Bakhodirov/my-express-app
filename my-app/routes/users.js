@@ -1,5 +1,6 @@
 var express = require('express');
 const { route } = require('.');
+const logUrlDetails = require('../middlewares/routeMiddleware');
 var router = express.Router();
 
 /* GET users listing. */
@@ -28,7 +29,7 @@ router.all('/methods' , (req,res,next) => {
 
 
 //Route Params
-router.get('/:userID/books/:bookID' , (req,res) => {
+router.get('/:userID/books/:bookID' , logUrlDetails , (req,res) => {
     res.status(200).json({
       status:true,
       data:req.params
